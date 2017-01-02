@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 4c535a3d0a6c54413a68c5ebb7c1a730
+timeCreated: 1481958485
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - 'Ghang '
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 1768d25ca14d64e1d80db9cf3855bcc4, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
