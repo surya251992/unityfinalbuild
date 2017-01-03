@@ -5,6 +5,7 @@ public class flash : MonoBehaviour {
 	
 	public Light myLight;
 	public GameObject dl;
+	//public Light dirlight;
 
 	int i;
 
@@ -22,6 +23,7 @@ public class flash : MonoBehaviour {
 
 		IEnumerator flashlight()
 		{
+		//dirlight.enabled = false;
 		myLight.enabled = true;
 				for (i = 1; i < 4; i++) {
 			        myLight.color = Color.blue;
@@ -32,6 +34,7 @@ public class flash : MonoBehaviour {
 			        yield return new WaitForSeconds (0.09f);
 				}
 		myLight.enabled = false;
+		//dirlight.enabled = true;
 			
 		}
 	
