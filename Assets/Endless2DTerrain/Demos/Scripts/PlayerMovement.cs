@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
 	public SoundBehavior sb;
 
 	public ParticleSystem lifeball;
+	public ParticleSystem smoke;
 
     void Start()
     {
@@ -186,6 +187,7 @@ public class PlayerMovement : MonoBehaviour
 
 	IEnumerator BoostTime(){
 		lifeball.Play ();
+		//smoke.startSize = 10;
 		Handheld.Vibrate();
 		Handheld.Vibrate();
 		boost = true;
@@ -205,6 +207,7 @@ public class PlayerMovement : MonoBehaviour
 		BoostLight.SetActive (false);
 		boostcounter = 0;
 		boost = false;
+		//smoke.startSize = 3;
 		pinkboostindicator [0].SetActive (false);
 		pinkboostindicator [1].SetActive (false);
 	}
@@ -232,6 +235,7 @@ public class PlayerMovement : MonoBehaviour
 		BoostLightFive.SetActive (false);
 		boostcounterfive = 0;
 		boostfive = false;
+		//smoke.startSize = 3;
 		greenboostindicator [0].SetActive (false);
 		greenboostindicator [1].SetActive (false);
 		greenboostindicator [2].SetActive (false);
