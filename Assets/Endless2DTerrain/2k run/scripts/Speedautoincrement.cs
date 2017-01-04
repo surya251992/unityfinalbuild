@@ -13,7 +13,7 @@ public class Speedautoincrement : MonoBehaviour {
 
 	IEnumerator Increment()
 	{
-		if(pl.speed < 38)
+		if(pl.speed < 41)
 		while(true)
 		{
 			pl.speed = pl.speed + 1f;
