@@ -165,8 +165,8 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: 2krun.keystore
+  AndroidKeyaliasName: 2krun
   AndroidTVCompatibility: 1
   AndroidIsGame: 1
   androidEnableBanner: 1
