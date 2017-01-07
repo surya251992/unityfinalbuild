@@ -97,10 +97,10 @@ public class PlayerMovement : MonoBehaviour
 			{
 				print ("Adunit entered");
 				PlayerPrefs.SetInt ("Death Count", 0);
-				if (Advertisement.IsReady())
+				/*if (Advertisement.IsReady())
 				{
 					Advertisement.Show ();
-				}
+				}*/
 			}
 			Application.LoadLevel (5);
 		} 
@@ -173,10 +173,10 @@ public class PlayerMovement : MonoBehaviour
 				{
 					print ("Adunit entered");
 					PlayerPrefs.SetInt ("Death Count", 0);
-					if (Advertisement.IsReady())
+					/*if (Advertisement.IsReady())
 					{
 						Advertisement.Show ();
-					}
+					}*/
 				}
 				Application.LoadLevel (4);
 			}
