@@ -42,6 +42,15 @@ public class PlayerMovement : MonoBehaviour
 	public ParticleSystem lifeball;
 	public ParticleSystem smoke;
 
+	void Awake()
+	{
+		if (Advertisement.isSupported) 
+		{
+			//Advertisement. = true;
+			Advertisement.Initialize ("1265058",true);
+		}
+	}
+
     void Start()
     {
 		//sc.enabled = false;
@@ -60,12 +69,6 @@ public class PlayerMovement : MonoBehaviour
 
 		StartCoroutine ("FirstRun");
         playerCamera.transparencySortMode = TransparencySortMode.Orthographic;
-
-		if (Advertisement.isSupported) 
-		{
-			//Advertisement. = true;
-			Advertisement.Initialize ("1265058",true);
-		}
 
     }
 
@@ -180,10 +183,10 @@ public class PlayerMovement : MonoBehaviour
 				{
 					print ("Adunit entered");
 					PlayerPrefs.SetInt ("Death Count", 0);
-					/*if (Advertisement.IsReady())
+					if (Advertisement.IsReady())
 					{
 						Advertisement.Show ();
-					}*/
+					}
 				}
 				Application.LoadLevel (4);
 			}
