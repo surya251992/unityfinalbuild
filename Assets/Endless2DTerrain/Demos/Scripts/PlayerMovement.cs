@@ -47,7 +47,7 @@ public class PlayerMovement : MonoBehaviour
 		if (Advertisement.isSupported) 
 		{
 			//Advertisement. = true;
-			Advertisement.Initialize ("1265058",true);
+			Advertisement.Initialize ("1265058",false);
 		}
 	}
 
@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerCamera = Camera.main;
         }
-		if (!PlayerPrefs.HasKey ("Death Count") || PlayerPrefs.GetInt("Death Count") > 3) 
+		if (!PlayerPrefs.HasKey ("Death Count") || PlayerPrefs.GetInt("Death Count") > 10) 
 		{
 			PlayerPrefs.SetInt ("Death Count", 0);
 		}
@@ -105,11 +105,37 @@ public class PlayerMovement : MonoBehaviour
 			print (PlayerPrefs.GetInt("Death Count").ToString());
 			if (PlayerPrefs.GetInt ("Death Count") >= 3) 
 			{
-				print ("Adunit entered");
-				PlayerPrefs.SetInt ("Death Count", 0);
-				if (Advertisement.IsReady())
+				//print ("Adunit entered");
+				if (PlayerPrefs.GetInt ("Death Count") == 3 || PlayerPrefs.GetInt ("Death Count") == 6) {
+					if (Advertisement.IsReady ("video")) {
+						Advertisement.Show ("video");
+					}
+				}
+				if (Advertisement.IsReady("rewardedVideo") && PlayerPrefs.GetInt ("Death Count") >= 10)
 				{
-					Advertisement.Show ();
+					PlayerPrefs.SetInt ("Death Count", 0);
+					Advertisement.Show ("rewardedVideo", new ShowOptions {
+						//pause = true,
+						resultCallback = result => {
+							switch(result)
+							{
+							case (ShowResult.Finished):
+								//onVideoPlayed(true);
+								print("finished");
+								break;
+							case (ShowResult.Failed):
+								print("failed");
+								PlayerPrefs.SetInt ("Death Count", 9);
+								//onVideoPlayed(false);
+								break;
+							case(ShowResult.Skipped):
+								print("skipped");
+								PlayerPrefs.SetInt ("Death Count", 9);
+								//onVideoPlayed(false);
+								break;
+							}
+						}
+					});
 				}
 			}
 			Application.LoadLevel (5);
@@ -181,11 +207,37 @@ public class PlayerMovement : MonoBehaviour
 				print (PlayerPrefs.GetInt("Death Count").ToString());
 				if (PlayerPrefs.GetInt ("Death Count") >= 3) 
 				{
-					print ("Adunit entered");
-					PlayerPrefs.SetInt ("Death Count", 0);
-					if (Advertisement.IsReady())
+					//print ("Adunit entered");
+					if (PlayerPrefs.GetInt ("Death Count") == 3 || PlayerPrefs.GetInt ("Death Count") == 6) {
+						if (Advertisement.IsReady ("video")) {
+							Advertisement.Show ("video");
+						}
+					}
+					if (Advertisement.IsReady("rewardedVideo") && PlayerPrefs.GetInt ("Death Count") >= 10)
 					{
-						Advertisement.Show ();
+						PlayerPrefs.SetInt ("Death Count", 0);
+						Advertisement.Show ("rewardedVideo", new ShowOptions {
+							//pause = true,
+							resultCallback = result => {
+								switch(result)
+								{
+								case (ShowResult.Finished):
+									//onVideoPlayed(true);
+									print("finished");
+									break;
+								case (ShowResult.Failed):
+									PlayerPrefs.SetInt ("Death Count", 9);
+									print("failed");
+									//onVideoPlayed(false);
+									break;
+								case(ShowResult.Skipped):
+									PlayerPrefs.SetInt ("Death Count", 9);
+									print("skipped");
+									//onVideoPlayed(false);
+									break;
+								}
+							}
+						});
 					}
 				}
 				Application.LoadLevel (4);
@@ -203,7 +255,7 @@ public class PlayerMovement : MonoBehaviour
 		boost = true;
 		BoostLight.SetActive (true);
 		speed = speed + 30;
-		yield return new WaitForSeconds(7);
+		yield return new WaitForSeconds(4);
 		lifeball.Stop ();
 		speed = speed - 30f;
 		for (int i = 0; i < 3; i++) 
@@ -229,7 +281,7 @@ public class PlayerMovement : MonoBehaviour
 		boostfive = true;
 		BoostLightFive.SetActive (true);
 		speed = speed + 20;
-		yield return new WaitForSeconds(6);
+		yield return new WaitForSeconds(3);
 		lifeball.Stop ();
 		yield return new WaitForSeconds(1);
 		BoostLightFive.SetActive (false);
