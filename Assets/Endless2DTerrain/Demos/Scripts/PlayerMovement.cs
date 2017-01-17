@@ -111,10 +111,11 @@ public class PlayerMovement : MonoBehaviour
 						Advertisement.Show ("video");
 					}
 				}
-				if (Advertisement.IsReady("rewardedVideo") && PlayerPrefs.GetInt ("Death Count") >= 10)
+				if (PlayerPrefs.GetInt ("Death Count") >= 10)
 				{
 					PlayerPrefs.SetInt ("Death Count", 0);
-					Advertisement.Show ("rewardedVideo"/*, new ShowOptions {
+					if (Advertisement.IsReady ("rewardedVideo")) {
+						Advertisement.Show ("rewardedVideo"/*, new ShowOptions {
 						//pause = true,
 						resultCallback = result => {
 							switch(result)
@@ -135,7 +136,9 @@ public class PlayerMovement : MonoBehaviour
 								break;
 							}
 						}
-					}*/);
+					}*/
+						);
+					}
 				}
 			}
 			Application.LoadLevel (5);
