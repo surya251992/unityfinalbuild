@@ -42,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
 	public ParticleSystem lifeball;
 	public ParticleSystem smoke;
 
+	public pause pause;
+
 	void Awake()
 	{
 		if (Advertisement.isSupported) 
@@ -61,11 +63,11 @@ public class PlayerMovement : MonoBehaviour
         {
             playerCamera = Camera.main;
         }
-		if (!PlayerPrefs.HasKey ("Death Count") || PlayerPrefs.GetInt("Death Count") > 10) 
+		if (!PlayerPrefs.HasKey ("DeathCount") || PlayerPrefs.GetInt("DeathCount") > 10) 
 		{
-			PlayerPrefs.SetInt ("Death Count", 0);
+			PlayerPrefs.SetInt ("DeathCount", 0);
 		}
-		print (PlayerPrefs.GetInt("Death Count").ToString());
+		print (PlayerPrefs.GetInt("DeathCount").ToString());
 
 		StartCoroutine ("FirstRun");
         playerCamera.transparencySortMode = TransparencySortMode.Orthographic;
@@ -80,10 +82,9 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = new Vector3(1, 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
-            if (Input.GetButton("Jump"))
-            {
-                moveDirection.y = jumpSpeed; 
-            }
+			if (Input.GetButton ("Jump")) {
+				moveDirection.y = jumpSpeed;
+			}
             if (Input.touchCount > 0)
             {
                 moveDirection.y = jumpSpeed;
@@ -101,21 +102,21 @@ public class PlayerMovement : MonoBehaviour
 		if (item.tag == "kill" && boost == false && boostfive == false && gamestart == false) {
 			PlayerPrefs.SetInt ("Money", whitemoney);
 			PlayerPrefs.SetInt ("Total Money", PlayerPrefs.GetInt("Total Money") + whitemoney);
-			PlayerPrefs.SetInt ("Death Count", (PlayerPrefs.GetInt ("Death Count") + 1));
-			print (PlayerPrefs.GetInt("Death Count").ToString());
-			if (PlayerPrefs.GetInt ("Death Count") >= 3) 
+			PlayerPrefs.SetInt ("DeathCount", (PlayerPrefs.GetInt ("DeathCount") + 1));
+			print (PlayerPrefs.GetInt("DeathCount").ToString());
+			if (PlayerPrefs.GetInt ("DeathCount") >= 3) 
 			{
 				//print ("Adunit entered");
-				if (PlayerPrefs.GetInt ("Death Count") == 3 || PlayerPrefs.GetInt ("Death Count") == 6) {
+				if (PlayerPrefs.GetInt ("DeathCount") == 3 || PlayerPrefs.GetInt ("DeathCount") == 6) {
 					if (Advertisement.IsReady ("video")) {
 						Advertisement.Show ("video");
 					}
 				}
-				if (PlayerPrefs.GetInt ("Death Count") >= 10)
+				if (PlayerPrefs.GetInt ("DeathCount") >= 10)
 				{
-					PlayerPrefs.SetInt ("Death Count", 0);
+					PlayerPrefs.SetInt ("DeathCount", 0);
 					if (Advertisement.IsReady ("rewardedVideo")) {
-						Advertisement.Show ("rewardedVideo"/*, new ShowOptions {
+						Advertisement.Show ("rewardedVideo", new ShowOptions {
 						//pause = true,
 						resultCallback = result => {
 							switch(result)
@@ -126,17 +127,17 @@ public class PlayerMovement : MonoBehaviour
 								break;
 							case (ShowResult.Failed):
 								print("failed");
-								PlayerPrefs.SetInt ("Death Count", 9);
+								PlayerPrefs.SetInt ("DeathCount", 9);
 								//onVideoPlayed(false);
 								break;
 							case(ShowResult.Skipped):
 								print("skipped");
-								PlayerPrefs.SetInt ("Death Count", 9);
+								PlayerPrefs.SetInt ("DeathCount", 9);
 								//onVideoPlayed(false);
 								break;
 							}
 						}
-					}*/
+					}
 						);
 					}
 				}
@@ -206,41 +207,42 @@ public class PlayerMovement : MonoBehaviour
 				print ("entered");
 				PlayerPrefs.SetInt ("Money", whitemoney);
 				PlayerPrefs.SetInt ("Total Money", PlayerPrefs.GetInt("Total Money") + whitemoney);
-				PlayerPrefs.SetInt ("Death Count", (PlayerPrefs.GetInt ("Death Count") + 1));
-				print (PlayerPrefs.GetInt("Death Count").ToString());
-				if (PlayerPrefs.GetInt ("Death Count") >= 3) 
+				PlayerPrefs.SetInt ("DeathCount", (PlayerPrefs.GetInt ("DeathCount") + 1));
+				print (PlayerPrefs.GetInt("DeathCount").ToString());
+				if (PlayerPrefs.GetInt ("DeathCount") >= 3) 
 				{
 					//print ("Adunit entered");
-					if (PlayerPrefs.GetInt ("Death Count") == 3 || PlayerPrefs.GetInt ("Death Count") == 6) {
+					if (PlayerPrefs.GetInt ("DeathCount") == 3 || PlayerPrefs.GetInt ("DeathCount") == 6) {
 						if (Advertisement.IsReady ("video")) {
 							Advertisement.Show ("video");
 						}
 					}
-					if (Advertisement.IsReady("rewardedVideo") && PlayerPrefs.GetInt ("Death Count") >= 10)
+					if (PlayerPrefs.GetInt ("DeathCount") >= 10)
 					{
-						PlayerPrefs.SetInt ("Death Count", 0);
-						Advertisement.Show ("rewardedVideo", new ShowOptions {
-							//pause = true,
-							resultCallback = result => {
-								switch(result)
-								{
-								case (ShowResult.Finished):
-									//onVideoPlayed(true);
-									print("finished");
-									break;
-								case (ShowResult.Failed):
-									PlayerPrefs.SetInt ("Death Count", 9);
-									print("failed");
-									//onVideoPlayed(false);
-									break;
-								case(ShowResult.Skipped):
-									PlayerPrefs.SetInt ("Death Count", 9);
-									print("skipped");
-									//onVideoPlayed(false);
-									break;
+						PlayerPrefs.SetInt ("DeathCount", 0);
+						if (Advertisement.IsReady ("rewardedVideo")) {
+							Advertisement.Show ("rewardedVideo", new ShowOptions {
+								//pause = true,
+								resultCallback = result => {
+									switch(result)
+									{
+									case (ShowResult.Finished):
+										//onVideoPlayed(true);
+										print("finished");
+										break;
+									case (ShowResult.Failed):
+										print("failed");
+										PlayerPrefs.SetInt ("DeathCount", 9);
+										//onVideoPlayed(false);
+										break;
+									case(ShowResult.Skipped):
+										print("skipped");
+										PlayerPrefs.SetInt ("DeathCount", 9);
+										//onVideoPlayed(false);
+										break;
+									}
 								}
-							}
-						});
+							});
 					}
 				}
 				Application.LoadLevel (4);
@@ -248,6 +250,7 @@ public class PlayerMovement : MonoBehaviour
 			Handheld.Vibrate();
 		}
 			
+	}
 	}
 
 	IEnumerator BoostTime(){

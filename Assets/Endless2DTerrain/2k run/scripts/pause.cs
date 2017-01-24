@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class pause : MonoBehaviour {
-	bool pauseindicator = false;
+	public bool pauseindicator = false;
 	public AudioSource bgm;
 	// Use this for initialization
 	public void onClick () 

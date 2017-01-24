@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadingIcon: {fileID: 189845432}
-  loadingDoneIcon: {fileID: 189845432}
+  loadingDoneIcon: {fileID: 1522420012}
   loadingText: {fileID: 1934443521}
   progressBar: {fileID: 1763974190}
   fadeOverlay: {fileID: 834680944}
@@ -587,7 +587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1522420011
 RectTransform:
   m_ObjectHideFlags: 0
@@ -648,7 +648,7 @@ Animator:
   m_GameObject: {fileID: 1522420010}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a25933e895b4f4d58af61cc299ca1e63, type: 2}
+  m_Controller: {fileID: 9100000, guid: 26916bceb004749b0a885564c3b1fbb0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
